@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-crew',
@@ -21,7 +22,9 @@ export class CrewComponent implements OnInit {
   }
 
   add(memberName: string, isFirst: boolean){
-    this.crew.push({name: memberName, firstMission: isFirst});
+    if (!this.crew.find(member => member['name'] === memberName)) {
+      this.crew.push({name: memberName, firstMission: isFirst});      
+    }
   }
 
   remove(memberName: object){
